@@ -58,7 +58,7 @@ public class Board extends JPanel implements ActionListener {//controller
         timer.start();
     }
     
-    private void clearBoard()
+    protected void clearBoard()
     {
         for (int i = 0; i < BoardHeight * BoardWidth; ++i)
             board.set(i, Tetrominoes.NoShape);
