@@ -56,8 +56,8 @@ public class Shape {//model
         setShape(values[x]);
     }
     
-    private void setX(int index, int x) { coords[index][0] = x; }
-    private void setY(int index, int y) { coords[index][1] = y; }
+    protected void setX(int index, int x) { coords[index][0] = x; }
+    protected void setY(int index, int y) { coords[index][1] = y; }
     public int x(int index) { return coords[index][0]; }
     public int y(int index) { return coords[index][1]; }
     public Tetrominoes getShape()  { return pieceShape; }
