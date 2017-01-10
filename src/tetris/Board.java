@@ -17,24 +17,21 @@ import tetris.Shape.Tetrominoes;
 
 public class Board extends JPanel implements ActionListener {//controller
 
-
      int BoardWidth = 10;
      int BoardHeight = 20;
     JLabel statusbar;
     GUI draw;
-    //
+    
     Timer timer;
     boolean isFallingFinished = false;
     boolean isStarted = false;
-    //boolean isPaused = false;
+    
     int numLinesRemoved = 0;
     int curX = 0;
     int curY = 0;
     
     Shape curPiece;
     TetrominoesBoard board;
-
-
 
     public Board(Tetris parent) {
        draw=new GUI();
@@ -45,19 +42,13 @@ public class Board extends JPanel implements ActionListener {//controller
 
        statusbar =  parent.getStatusBar();
        board = new TetrominoesBoard(BoardHeight,BoardWidth);
-//       for(int index = 0; index < BoardWidth*BoardHeight; index++){
-//           board.add(Tetrominoes.NoShape);
-//       }
-
        addKeyListener(new TAdapter());//key event
        clearBoard();  
     }
     
     public void start()
     {
-        //if (isPaused)
-            //return;
-
+ 
         isStarted = true;
         isFallingFinished = false;
         numLinesRemoved = 0;
@@ -95,7 +86,6 @@ public class Board extends JPanel implements ActionListener {//controller
             oneLineDown();
         }
     }
-
 
     int squareWidth() { return (int) getSize().getWidth() / BoardWidth; }
     int squareHeight() { return (int) getSize().getHeight() / BoardHeight; }
@@ -157,13 +147,11 @@ public class Board extends JPanel implements ActionListener {//controller
             board.set((y * BoardWidth) + x, curPiece.getShape());
         }
 
-        removeFullLines();//若有消除列 isFallingFinished 變為true
+        removeFullLines();
 
-        if (!isFallingFinished)//預設為false 
+        if (!isFallingFinished)
             newPiece();
     }
-
-   
 
     private boolean tryMove(Shape newPiece, int newX, int newY)
     {
@@ -209,13 +197,11 @@ public class Board extends JPanel implements ActionListener {//controller
         if (numFullLines > 0) {
             numLinesRemoved += numFullLines;
             statusbar.setText("Lines : "+String.valueOf(numLinesRemoved));
-            isFallingFinished = true;
+            isFallingFinished = false;
             curPiece.setShape(Tetrominoes.NoShape);
             repaint();
         }
      }
-
-  
 
     class TAdapter extends KeyAdapter {
          public void keyPressed(KeyEvent e) {
@@ -233,12 +219,10 @@ public class Board extends JPanel implements ActionListener {//controller
              case KeyEvent.VK_RIGHT:
                  tryMove(curPiece, curX + 1, curY);
                  break;
-             case 'c':case'C':case KeyEvent.VK_UP:
+             case  KeyEvent.VK_UP:
                  tryMove(curPiece.rotateRight(), curX, curY);
                  break;
-             //case 'z':case 'Z':
-                // tryMove(curPiece.rotateLeft(), curX, curY);
-                 //break;
+            
              case KeyEvent.VK_SPACE:
                  dropDown();
                  break;
